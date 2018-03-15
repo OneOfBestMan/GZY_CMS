@@ -8,7 +8,12 @@ namespace GZY_CMS.Model
     /// <summary>
     /// 栏目表
     /// </summary>
-    class GZY_Column
+    public class GZY_Column
     {
+        public int ID { get; set; }
+        public int ParentID { get; set; }
+        public int SortNumber { get; set; }
+        public string ColumnName { get; set; }
+        public string ColumnDescription { get; set; }
     }
 }

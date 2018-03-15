@@ -4,7 +4,10 @@ using System.Text;
 
 namespace GZY_CMS.Model
 {
-    class GZY_Advertisement
+    /// <summary>
+    /// 广告表
+    /// </summary>
+    public class GZY_Advertisement
     {
     }
 }
