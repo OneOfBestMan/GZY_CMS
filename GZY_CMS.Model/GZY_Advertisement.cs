@@ -9,5 +9,6 @@ namespace GZY_CMS.Model
     /// </summary>
     public class GZY_Advertisement
     {
+        public int ID { get; set; }
     }
 }
