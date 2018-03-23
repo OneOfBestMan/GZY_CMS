@@ -5,13 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GZY_CMS.WebClient.Models;
+using GZY_CMS.IService;
 
 namespace GZY_CMS.WebClient.Controllers
 {
     public class HomeController : Controller
     {
+
+        public ITestService MyProperty { get; set; }
         public IActionResult Index()
         {
+            MyProperty.Add();
             return View();
         }
 

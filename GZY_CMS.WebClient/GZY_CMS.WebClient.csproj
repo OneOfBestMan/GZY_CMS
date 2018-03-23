@@ -12,4 +12,10 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GZY_CMS.Core\GZY_CMS.Core.csproj" />
+    <ProjectReference Include="..\GZY_CMS.IService\GZY_CMS.IService.csproj" />
+    <ProjectReference Include="..\GZY_CMS.Model.Service\GZY_CMS.Service.csproj" />
+  </ItemGroup>
+
 </Project>

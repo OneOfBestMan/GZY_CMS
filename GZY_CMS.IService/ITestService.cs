@@ -2,7 +2,8 @@
 
 namespace GZY_CMS.IService
 {
-    public class Class1
+    public interface ITestService
     {
+        int Add();
     }
 }
