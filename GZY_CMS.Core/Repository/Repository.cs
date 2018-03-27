@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GZY_CMS.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GZY_CMS.Core.Repository
 {
-    public class Repository<T, TD> : IRepository<T, TD> where T : class
+    public class Repository<T, TD> : IDependency, IRepository<T, TD> where T : class
           where TD : DbContext
     {
 

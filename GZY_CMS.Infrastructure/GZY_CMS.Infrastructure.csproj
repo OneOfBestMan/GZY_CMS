@@ -4,8 +4,4 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GZY_CMS.Infrastructure\GZY_CMS.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>

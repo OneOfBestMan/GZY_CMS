@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GZY_CMS.Model.Service\GZY_CMS.Service.csproj" />
+    <ProjectReference Include="..\GZY_CMS.Infrastructure\GZY_CMS.Infrastructure.csproj" />
+    <ProjectReference Include="..\GZY_CMS.Utility\GZY_CMS.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>
