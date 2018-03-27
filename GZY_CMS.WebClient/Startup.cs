@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using GZY_CMS.Core.Autofac;
+using GZY_CMS.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace GZY_CMS.WebClient
 {
@@ -24,7 +26,8 @@ namespace GZY_CMS.WebClient
         {
             services.RegisterController();
             services.AddMvc();
-            
+            services.AddDbContextPool<GZYCMSContext>(
+                    options => options.UseMySql(@"Server=101.37.25.170;database=GZY_CMS;uid=sheca@2017;pwd=YM2U8MM9;"));
             return services.ReplacementIOC(new AutofacModule());
         }
 
@@ -38,7 +41,7 @@ namespace GZY_CMS.WebClient
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(" / Home/Error");
             }
 
             app.UseStaticFiles();

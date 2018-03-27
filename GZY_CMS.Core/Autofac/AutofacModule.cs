@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using GZY_CMS.Core.Repository;
 using GZY_CMS.Infrastructure;
 using GZY_CMS.Utility.Reflection;
 using System;
@@ -25,11 +26,34 @@ namespace GZY_CMS.Core.Autofac
             var AllServices = assemblyss
                .SelectMany(s => s.GetTypes())
                .Where(p => baseType.IsAssignableFrom(p) && p != baseType).ToArray();
+
+          
             builder.RegisterAssemblyTypes(assemblyss)
                 .Where(p => baseType.IsAssignableFrom(p) && p != baseType)
-                .AsImplementedInterfaces()
+                .AsImplementedInterfaces().PropertiesAutowired()
                 .InstancePerLifetimeScope();
+           builder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).PropertiesAutowired().InstancePerLifetimeScope();
 
         }
+    }
+
+
+    public class TRepository<T> : ITRepository<T>
+        where T : class
+    {
+        public string newclass()
+        {
+            
+                return "asdasd";
+            
+        }
+    }
+
+
+    public interface ITRepository<T>
+         where T : class
+    {
+        string newclass();
+
     }
 }

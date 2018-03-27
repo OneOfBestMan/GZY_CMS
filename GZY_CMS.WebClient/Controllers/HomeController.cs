@@ -16,6 +16,8 @@ namespace GZY_CMS.WebClient.Controllers
         public IActionResult Index()
         {
             MyProperty.Add();
+
+
             return View();
         }
 

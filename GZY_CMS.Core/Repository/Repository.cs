@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GZY_CMS.Core.Repository
 {
-    public class Repository<T, TD> : IDependency, IRepository<T, TD> where T : class
+    public class Repository<T, TD> : IRepository<T, TD> where T : class
           where TD : DbContext
     {
 
