@@ -14,46 +14,23 @@ namespace GZY_CMS.Core.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             Type baseType = typeof(IDependency);
-            //注入测试服务
-            // builder.RegisterType<TestService>().As<ITestService>();
+            
             DirectoryAssemblyFinder daf = new DirectoryAssemblyFinder();
             var assemblyss = daf.FindAll();
-            //批量注入
-            var assemblys = AppDomain.CurrentDomain.GetAssemblies();
-            //string assembleFileName = Assembly.GetExecutingAssembly().CodeBase.Replace("file:///", "");
-            //var typesToRegister = asm.GetTypes()
-            //Assembly asm = Assembly.LoadFile(assembleFileName);
-            var AllServices = assemblyss
-               .SelectMany(s => s.GetTypes())
-               .Where(p => baseType.IsAssignableFrom(p) && p != baseType).ToArray();
+            //调试用
+            //var AllServices = assemblyss
+            //   .SelectMany(s => s.GetTypes())
+            //   .Where(p => baseType.IsAssignableFrom(p) && p != baseType).ToArray();
 
           
             builder.RegisterAssemblyTypes(assemblyss)
                 .Where(p => baseType.IsAssignableFrom(p) && p != baseType)
                 .AsImplementedInterfaces().PropertiesAutowired()
                 .InstancePerLifetimeScope();
+           //注入泛型仓储服务,支持多上下文
            builder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).PropertiesAutowired().InstancePerLifetimeScope();
 
         }
     }
 
-
-    public class TRepository<T> : ITRepository<T>
-        where T : class
-    {
-        public string newclass()
-        {
-            
-                return "asdasd";
-            
-        }
-    }
-
-
-    public interface ITRepository<T>
-         where T : class
-    {
-        string newclass();
-
-    }
 }
