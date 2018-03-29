@@ -4,68 +4,115 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GZY_CMS.WebServer</title>
+    <link rel="stylesheet" href="~/Ace/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/Ace/components/font-awesome/css/font-awesome.css" />
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="~/Ace/assets/css/ace-fonts.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="~/Ace/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="../assets/css/ace-part2.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href="~/Ace/assets/css/ace-skins.css" />
+    <link rel="stylesheet" href="~/Ace/assets/css/ace-rtl.css" />
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="../assets/css/ace-ie.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="~/Ace/assets/js/ace-extra.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="../components/html5shiv/dist/html5shiv.min.js"></script>
+    <script src="../components/respond/dest/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">GZY_CMS.WebServer</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - GZY_CMS.WebServer</p>
-        </footer>
-    </div>
+<body class="no-skin">
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+    @RenderBody()
 
+
+
+
+    <!--[if !IE]> -->
+    <script src="~/Ace/components/jquery/dist/jquery.js"></script>
+
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="../components/jquery.1x/dist/jquery.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='~/Ace/components/_mod/jquery.mobile.custom/jquery.mobile.custom.js'>" + "<" + "/script>");
+    </script>
+    <script src="~/Ace/components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/Ace/components/jquery/dist/jquery.js"></script>
+    <script src="~/Ace/components/_mod/jquery-ui.custom/jquery-ui.custom.js"></script>
+    <script src="~/Ace/components/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
+    <script src="~/Ace/components/_mod/easypiechart/jquery.easypiechart.js"></script>
+    <script src="~/Ace/components/jquery.sparkline/index.js"></script>
+    <script src="~/Ace/components/Flot/jquery.flot.js"></script>
+    <script src="~/Ace/components/Flot/jquery.flot.pie.js"></script>
+    <script src="~/Ace/components/Flot/jquery.flot.resize.js"></script>
+
+    <!-- ace scripts -->
+    <script src="~/Ace/assets/js/src/elements.scroller.js"></script>
+    <script src="~/Ace/assets/js/src/elements.colorpicker.js"></script>
+    <script src="~/Ace/assets/js/src/elements.fileinput.js"></script>
+    <script src="~/Ace/assets/js/src/elements.typeahead.js"></script>
+    <script src="~/Ace/assets/js/src/elements.wysiwyg.js"></script>
+    <script src="~/Ace/assets/js/src/elements.spinner.js"></script>
+    <script src="~/Ace/assets/js/src/elements.treeview.js"></script>
+    <script src="~/Ace/assets/js/src/elements.wizard.js"></script>
+    <script src="~/Ace/assets/js/src/elements.aside.js"></script>
+    <script src="~/Ace/assets/js/src/ace.js"></script>
+    <script src="~/Ace/assets/js/src/ace.basics.js"></script>
+    <script src="~/Ace/assets/js/src/ace.scrolltop.js"></script>
+    <script src="~/Ace/assets/js/src/ace.ajax-content.js"></script>
+    <script src="~/Ace/assets/js/src/ace.touch-drag.js"></script>
+    <script src="~/Ace/assets/js/src/ace.sidebar.js"></script>
+    <script src="~/Ace/assets/js/src/ace.sidebar-scroll-1.js"></script>
+    <script src="~/Ace/assets/js/src/ace.submenu-hover.js"></script>
+    <script src="~/Ace/assets/js/src/ace.widget-box.js"></script>
+    <script src="~/Ace/assets/js/src/ace.settings.js"></script>
+    <script src="~/Ace/assets/js/src/ace.settings-rtl.js"></script>
+    <script src="~/Ace/assets/js/src/ace.settings-skin.js"></script>
+    <script src="~/Ace/assets/js/src/ace.widget-on-reload.js"></script>
+    <script src="~/Ace/assets/js/src/ace.searchbox-autocomplete.js"></script>
     @RenderSection("Scripts", required: false)
+
+    <div class="footer">
+        <div class="footer-inner">
+            <!-- #section:basics/footer -->
+            <div class="footer-content">
+                <span class="bigger-120">
+                    <span class="blue bolder">Ace</span>
+                    Application &copy; 2013-2014
+                </span>
+
+                &nbsp; &nbsp;
+                <span class="action-buttons">
+                    <a href="#">
+                        <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+                    </a>
+                </span>
+            </div>
+
+            <!-- /section:basics/footer -->
+        </div>
+    </div>
 </body>
 </html>

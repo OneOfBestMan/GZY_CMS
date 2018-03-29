@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GZY_CMS.WebClient", "GZY_CM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GZY_CMS.Infrastructure", "GZY_CMS.Infrastructure\GZY_CMS.Infrastructure.csproj", "{161B1B19-90B0-4DB5-84A3-61C89FA433EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZY_CMS.WebServer", "GZY_CMS.WebServer\GZY_CMS.WebServer.csproj", "{13911DE6-14B2-424F-A267-85C5E38B2A76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GZY_CMS.WebServer", "GZY_CMS.WebServer\GZY_CMS.WebServer.csproj", "{13911DE6-14B2-424F-A267-85C5E38B2A76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZY_CMS.SystemModel", "GZY_CMS.SystemModel\GZY_CMS.SystemModel.csproj", "{7A6ACA3F-F077-433A-ACD0-6E12235C3FB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{13911DE6-14B2-424F-A267-85C5E38B2A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13911DE6-14B2-424F-A267-85C5E38B2A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13911DE6-14B2-424F-A267-85C5E38B2A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A6ACA3F-F077-433A-ACD0-6E12235C3FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6ACA3F-F077-433A-ACD0-6E12235C3FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6ACA3F-F077-433A-ACD0-6E12235C3FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6ACA3F-F077-433A-ACD0-6E12235C3FB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

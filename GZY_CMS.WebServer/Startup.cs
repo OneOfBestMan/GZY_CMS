@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GZY_CMS.Core.Autofac;
+using GZY_CMS.Model;
+using GZY_CMS.SystemModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,9 +23,15 @@ namespace GZY_CMS.WebServer
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.RegisterController();
             services.AddMvc();
+            services.AddDbContextPool<GZYCMSContext>(
+                    options => options.UseMySql(@"Server=111.231.81.169;database=GZY_CMS;uid=root;pwd=Gzy*123456;"));
+            services.AddDbContextPool<SystemContext>(
+                   options => options.UseMySql(@"Server=111.231.81.169;database=GZY_System;uid=root;pwd=Gzy*123456;"));
+            return services.ReplacementIOC(new AutofacModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
