@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewData["Title"] = "UserManager";
+}
+
+<!-- #section:basics/content.breadcrumbs -->
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">首页</a>
+        </li>
+
+        <li>
+            <a href="#">用户管理</a>
+        </li>
+        <li class="active">用户信息</li>
+    </ul><!-- /.breadcrumb -->
+    <!-- #section:basics/content.searchbox -->
+
+
+    <!-- /section:basics/content.breadcrumbs -->
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="enterprisetools">
+                    <div>
+                        <form id="queryForm" action="@Url.Action("GetList", "CompleteWork")" method="get">
+                            <div class="widget-box ui-sortable-handle " >
+                                <div class="widget-header">
+                                    <h5 class="widget-title">查询区</h5>
+
+                                    <!-- #section:custom/widget-box.toolbar -->
+                                    <div class="widget-toolbar">
+
+                                        <a href="#" data-action="collapse">
+                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                        </a>
+                                    </div>
+
+                                    <!-- /section:custom/widget-box.toolbar -->
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <table style="border-spacing:10px;  border-collapse:separate;" width="100%" >
+                                            <tr>
+                                                <td>受理编号：</td>
+                                                <td>
+                                                    <input type="text" class="input-sm" id="txt_slbh" name="txt_slbh" />
+                                                </td>
+                                                <td>信访人/单位：</td>
+                                                <td>
+                                                    <input type="text" class="input-sm" id="txt_xfr" name="txt_xfr" />
+                                                </td>
+                                                <td>受理日期：</td>
+                                                <td>
+                                                    <input type="text" class="input-sm" id="txt_xfr" name="txt_xfr" />
+                                                </td>
+                                                <td>重要程度:</td>
+                                                <td>
+                                                    <select id="txt_zycd" name="txt_zycd" class="input-sm">
+                                                        <option value="-1">请选择</option>
+                                                        <option value="1">重要件</option>
+                                                        <option value="2">一般件</option>
+                                                        <option value="3">参阅件</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="8" style="text-align:center">
+                                                    <button class="btn btn-primary radius-10">
+                                                        <i class="ace-icon fa fa-flask align-top bigger-125"></i>
+                                                        查询
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" value="@(ViewBag.guid == "" ? "" : ViewBag.guid)" name="guid">
+                        </form>
+                    </div>
+                    <!-- /section:basics/content.searchbox -->
+                </div>
+                <table id="grid-table"></table>
+
+                <div id="grid-pager"></div>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+    @section scripts{
+
+        <script type="text/javascript">
+
+            //resize on sidebar collapse/expand
+
+
+            jQuery(function ($) {
+               
+                var grid_selector = "#grid-table";
+                var pager_selector = "#grid-pager";
+
+                $("#grid-table").jqGrid(
+                    {
+                        autowidth:true,
+                        url: 'data/JSONData.json',//组件创建完成之后请求数据的url
+                        datatype: "json",//请求数据返回的类型。可选json,xml,txt
+                        colNames: ['Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Notes'],//jqGrid的列显示名字
+                        colModel: [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
+       
+                            { name: 'id', index: 'id', width: 60, sorttype: "int", editable: true },
+                            { name: 'sdate', index: 'sdate', width: 90, editable: true, sorttype: "date" },
+                            { name: 'name', index: 'name', width: 150, editable: true, editoptions: { size: "20", maxlength: "30" } },
+                            { name: 'stock', index: 'stock', width: 70, editable: true, edittype: "checkbox", editoptions: { value: "Yes:No" } },
+                            { name: 'ship', index: 'ship', width: 90, editable: true, edittype: "select", editoptions: { value: "FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX" } },
+                            { name: 'note', index: 'note', width: 150, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "10" } },
+                            { name: 'sdssate', index: 'sdate', width: 90, editable: true, sorttype: "date" }, 
+                        ],
+                        rowNum: 10,//一页显示多少条
+                        rowList: [10, 20, 30],//可供用户选择一页显示多少条
+                        pager: '#pager2',//表格页脚的占位符(一般是div)的id
+                        sortname: 'id',//初始化的时候排序的字段
+                        sortorder: "desc",//排序方式,可选desc,asc
+                        mtype: "post",//向后台请求数据的ajax的类型。可选post,get
+                        viewrecords: true,
+                        caption: "JSON Example"//表格的标题名字
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                $(document).one('ajaxloadstart.page', function (e) {
+                    $.jgrid.gridDestroy(grid_selector);
+                    $('.ui-jqdialog').remove();
+                });
+            });
+        </script>
+
+    }

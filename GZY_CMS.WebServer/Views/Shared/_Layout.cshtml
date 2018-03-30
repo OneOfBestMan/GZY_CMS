@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="~/Ace/components/font-awesome/css/font-awesome.css" />
 
     <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="~/Ace/components/_mod/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" href="~/Ace/components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="~/Ace/components/_mod/jqgrid/ui.jqgrid.css" />
     <!-- text fonts -->
     <link rel="stylesheet" href="~/Ace/assets/css/ace-fonts.css" />
 
@@ -51,7 +54,7 @@
     <script type="text/javascript">
         if ('ontouchstart' in document.documentElement) document.write("<script src='~/Ace/components/_mod/jquery.mobile.custom/jquery.mobile.custom.js'>" + "<" + "/script>");
     </script>
-   @* <script src="~/Ace/components/jquery/dist/jquery.js"></script>*@
+    @* <script src="~/Ace/components/jquery/dist/jquery.js"></script>*@
     <script src="~/Ace/components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/Ace/components/_mod/jquery-ui.custom/jquery-ui.custom.js"></script>
     <script src="~/Ace/components/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
@@ -60,6 +63,10 @@
     <script src="~/Ace/components/Flot/jquery.flot.js"></script>
     <script src="~/Ace/components/Flot/jquery.flot.pie.js"></script>
     <script src="~/Ace/components/Flot/jquery.flot.resize.js"></script>
+    <script src="~/Ace/components/jquery-ui/jquery-ui.js"></script>
+    <script src="~/Ace/components/jqGrid/js/jquery.jqGrid.js"></script>
+    <script src="~/Ace/components/jquery-ui/ui/i18n/datepicker-zh-CN.js"></script>
+    <script src="~/Ace/components/jqGrid/js/i18n/grid.locale-cn.js"></script>
 
     <!-- ace scripts -->
     <script src="~/Ace/assets/js/src/elements.scroller.js"></script>
@@ -85,35 +92,24 @@
     <script src="~/Ace/assets/js/src/ace.settings-skin.js"></script>
     <script src="~/Ace/assets/js/src/ace.widget-on-reload.js"></script>
     <script src="~/Ace/assets/js/src/ace.searchbox-autocomplete.js"></script>
+
+    <script>
+        $(function () {
+            $(".JQdatepicker").attr("readonly", "readonly");
+            $(".JQdatepicker").datepicker({
+                //changeMonth: true,
+                changeYear: true,
+                yearRange: "1990:2050",
+                onClose: function (selectedDate, drq) {
+                    $("#" + drq.id).blur()
+                    // 日期验证
+                }
+            });
+           
+        })
+    </script>
     @RenderSection("Scripts", required: false)
 
-    <div class="footer">
-        <div class="footer-inner">
-            <!-- #section:basics/footer -->
-            <div class="footer-content">
-                <span class="bigger-120">
-                    <span class="blue bolder">GZY_CMS</span>
-                    Application &copy; 2018-2019
-                </span>
 
-                &nbsp; &nbsp;
-                <span class="action-buttons">
-                    <a href="#">
-                        <i class="ace-icon fa fa-weibo light-blue bigger-150"></i>
-                    </a>
-
-                    <a href="#">
-                        <i class="ace-icon fa fa-weixin text-primary bigger-150"></i>
-                    </a>
-
-                    <a href="#">
-                        <i class="ace-icon fa fa-windows orange bigger-150"></i>
-                    </a>
-                </span>
-            </div>
-
-            <!-- /section:basics/footer -->
-        </div>
-    </div>
 </body>
 </html>
