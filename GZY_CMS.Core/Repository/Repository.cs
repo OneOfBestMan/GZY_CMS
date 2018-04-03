@@ -103,6 +103,30 @@ namespace GZY_CMS.Core.Repository
 
         }
 
+        /// <summary>
+        /// 根据条件查询实体集合(需自行tolist,自行异步)
+        /// </summary>
+        /// <param name="where">查询条件</param>
+        /// <returns></returns>
+        public virtual IQueryable<T> GetList()
+        {
+
+            return Model.AsNoTracking();
+
+        }
+
+        /// <summary>
+        /// 根据条件查询实体集合(需自行tolist,自行异步)
+        /// </summary>
+        /// <param name="where">查询条件</param>
+        /// <returns></returns>
+        public async virtual Task<IQueryable<T>> GetListAsync()
+        {
+
+            return await Task.Run(() => Model.AsNoTracking());
+
+        }
+
 
         /// <summary>
         /// 根据传进来的实体类型查询该实体的集合
@@ -130,6 +154,23 @@ namespace GZY_CMS.Core.Repository
             return await model.FirstOrDefaultAsync(where);
 
         }
+
+
+
+        /// <summary>
+        /// 根据传进来的实体类型查询该实体的集合
+        /// </summary>
+        /// <typeparam name="TM">实体类型</typeparam>
+        /// <param name="where">查询条件</param>
+        /// <returns></returns>
+        public virtual IQueryable<TM> GetList<TM>() where TM : class
+        {
+
+            var model = Entities.Set<TM>();
+            return model.AsNoTracking();
+
+        }
+
 
         /// <summary>
         /// 根据条件查询实体数量

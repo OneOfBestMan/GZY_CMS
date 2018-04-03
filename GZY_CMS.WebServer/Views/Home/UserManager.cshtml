@@ -45,32 +45,28 @@
                                     <div class="widget-main">
                                         <table style="border-spacing:10px;  border-collapse:separate;" width="100%" >
                                             <tr>
-                                                <td>受理编号：</td>
+                                                <td>账户名：</td>
                                                 <td>
                                                     <input type="text" class="input-sm" id="txt_slbh" name="txt_slbh" />
                                                 </td>
-                                                <td>信访人/单位：</td>
+                                                <td>用户姓名：</td>
                                                 <td>
                                                     <input type="text" class="input-sm" id="txt_xfr" name="txt_xfr" />
                                                 </td>
-                                                <td>受理日期：</td>
-                                                <td>
-                                                    <input type="text" class="input-sm" id="txt_xfr" name="txt_xfr" />
-                                                </td>
-                                                <td>重要程度:</td>
+                                                <td>是否有效：</td>
                                                 <td>
                                                     <select id="txt_zycd" name="txt_zycd" class="input-sm">
-                                                        <option value="-1">请选择</option>
-                                                        <option value="1">重要件</option>
-                                                        <option value="2">一般件</option>
-                                                        <option value="3">参阅件</option>
+                                                        <option value="">请选择</option>
+                                                        <option value="Y">有效</option>
+                                                        <option value="N">无效</option>
                                                     </select>
                                                 </td>
+                                               
                                             </tr>
                                             <tr>
                                                 <td colspan="8" style="text-align:center">
                                                     <button class="btn btn-primary radius-10">
-                                                        <i class="ace-icon fa fa-flask align-top bigger-125"></i>
+                                                        <i class="ace-icon fa fa-search align-top bigger-125"></i>
                                                         查询
                                                     </button>
                                                 </td>
@@ -86,7 +82,6 @@
                     <!-- /section:basics/content.searchbox -->
                 </div>
                 <table id="grid-table"></table>
-
                 <div id="grid-pager"></div>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -94,10 +89,6 @@
     @section scripts{
 
         <script type="text/javascript">
-
-            //resize on sidebar collapse/expand
-
-
             jQuery(function ($) {
                
                 var grid_selector = "#grid-table";
@@ -126,27 +117,16 @@
                         sortorder: "desc",//排序方式,可选desc,asc
                         mtype: "post",//向后台请求数据的ajax的类型。可选post,get
                         viewrecords: true,
-                        caption: "JSON Example"//表格的标题名字
+                        caption: "用户列表"//表格的标题名字
                     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                $(document).one('ajaxloadstart.page', function (e) {
-                    $.jgrid.gridDestroy(grid_selector);
-                    $('.ui-jqdialog').remove();
-                });
             });
+
+            //查询数据
+            function Selectdate() {
+
+
+            }
         </script>
 
     }

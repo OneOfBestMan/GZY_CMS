@@ -49,8 +49,12 @@ namespace GZY_CMS.Core.Repository
         Task<T> GetAsync(Expression<Func<T, bool>> where);
         Task<TM> GetAsync<TM>(Expression<Func<TM, bool>> where) where TM : class;
         IQueryable<T> GetList(Expression<Func<T, bool>> where);
+        IQueryable<T> GetList();
         IQueryable<TM> GetList<TM>(Expression<Func<TM, bool>> where) where TM : class;
+
+        IQueryable<TM> GetList<TM>() where TM : class;
         Task<IQueryable<T>> GetListAsync(Expression<Func<T, bool>> where);
+        Task<IQueryable<T>> GetListAsync();
         bool Remove(T t);
         bool Remove<TM>(TM m) where TM : class;
         Task<bool> RemoveAsync(T t);

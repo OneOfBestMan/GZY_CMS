@@ -5,11 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GZY_CMS.WebServer.Models;
+using GZY_CMS.IService;
 
 namespace GZY_CMS.WebServer.Controllers
 {
     public class HomeController : Controller
     {
+
+        public IUserService userService { get; set; }
         public IActionResult Index()
         {
             return View();
@@ -37,6 +40,14 @@ namespace GZY_CMS.WebServer.Controllers
 
         public IActionResult UserManager()
         {
+            return View();
+        }
+
+
+
+        public string UserSelect()
+        {
+            var date = userService.Select();
             return View();
         }
     }

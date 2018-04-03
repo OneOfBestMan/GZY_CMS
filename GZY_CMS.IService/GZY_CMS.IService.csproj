@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GZY_CMS.Infrastructure\GZY_CMS.Infrastructure.csproj" />
+    <ProjectReference Include="..\GZY_CMS.SystemModel\GZY_CMS.SystemModel.csproj" />
   </ItemGroup>
 
 </Project>

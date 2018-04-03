@@ -2,7 +2,9 @@
 using GZY_CMS.Core.Repository;
 using GZY_CMS.IService;
 using GZY_CMS.Model;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GZY_CMS.Service
@@ -20,7 +22,9 @@ namespace GZY_CMS.Service
         public int Add()
         {
             MyProperty.GetList(a => 1 == 1).ToList();
+
             return 1;
         }
+
     }
 }
