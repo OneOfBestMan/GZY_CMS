@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace GZY_CMS.Service
 {
-    public class UserService : IUserService
+    public class UserService :  IUserService
     {
 
 

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GZY_CMS.WebServer.Models;
 using GZY_CMS.IService;
+using GZY_CMS.Core.Base;
+using GZY_CMS.Utility.AjaxResult;
 
 namespace GZY_CMS.WebServer.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
 
         public IUserService userService { get; set; }
@@ -40,15 +42,14 @@ namespace GZY_CMS.WebServer.Controllers
 
         public IActionResult UserManager()
         {
+           // Json()
             return View();
         }
 
-
-
-        public string UserSelect()
+        public AjaxObjectResult<List<SystemModel.GZY_User>> UserSelect(string Loginname, string Name, string ValidYN, int index, int rows)
         {
-            var date = userService.Select();
-            return View();
+            var date = userService.Select(Loginname, Name,ValidYN,index,rows,out int total);
+            return SuccessData(date);
         }
     }
 }
