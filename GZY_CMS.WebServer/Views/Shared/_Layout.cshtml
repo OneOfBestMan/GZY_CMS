@@ -92,7 +92,7 @@
     <script src="~/Ace/assets/js/src/ace.settings-skin.js"></script>
     <script src="~/Ace/assets/js/src/ace.widget-on-reload.js"></script>
     <script src="~/Ace/assets/js/src/ace.searchbox-autocomplete.js"></script>
-
+    <script src="~/js/vue/vue.js"></script>
     <script>
         $(function () {
             $(".JQdatepicker").attr("readonly", "readonly");
@@ -105,7 +105,30 @@
                     // 日期验证
                 }
             });
-           
+
+            $.ajaxSetup({
+                cache: false,
+                //请求失败遇到异常触发
+                error: function (xhr, status, e) {
+                    $.messager.progress('close');
+                    if (e == null) {
+                        e = "未知错误"
+                    }
+                    $.messager.alert("提示", "发生异常的错误!信息:" + e)
+                },
+                //完成请求后触发。即在success或error触发后触发
+                complete: function (xhr, status) {
+                    $.messager.progress('close');
+                },
+                //发送请求前触发
+                beforeSend: function (xhr) {
+                    $.messager.progress({
+                        title: '系统信息',
+                        msg: "努力的加载中..",
+                        text: "数据加载中"
+                    });
+                },
+            })
         })
     </script>
     @RenderSection("Scripts", required: false)

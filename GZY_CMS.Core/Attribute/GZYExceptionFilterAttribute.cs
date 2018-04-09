@@ -9,7 +9,7 @@ using System.Text;
 
 namespace GZY_CMS.Core.Attribute
 {
-    public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
+    public class GZYExceptionFilterAttribute : ExceptionFilterAttribute
     {
        
 

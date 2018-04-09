@@ -1,4 +1,5 @@
-﻿using GZY_CMS.Utility.AjaxResult;
+﻿using GZY_CMS.Core.Attribute;
+using GZY_CMS.Utility.AjaxResult;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 
 namespace GZY_CMS.Core.Base
 {
-
+    [GZYExceptionFilterAttribute]
     public class BaseController: Controller
     {
         /// <summary>
