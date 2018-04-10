@@ -46,9 +46,17 @@ namespace GZY_CMS.WebServer.Controllers
             return View();
         }
 
-        public AjaxObjectResult<List<SystemModel.GZY_User>> UserSelect(string Loginname, string Name, string ValidYN, int index, int rows)
+        public AjaxObjectResult<List<SystemModel.GZY_User>> UserSelect(string Loginname, string Name, string ValidYN, int page, int rows)
         {
-            var date = userService.Select(Loginname, Name,ValidYN,index,rows,out int total);
+            var date = userService.Select(Loginname, Name,ValidYN, page, rows,out int Records);
+            int total = Records / rows + (Records % rows > 0 ? 1 : 0);
+            var json = new
+            {
+                page = page,
+                total = total,
+                records = Records,
+                list = date
+            };
             return SuccessData(date);
         }
     }

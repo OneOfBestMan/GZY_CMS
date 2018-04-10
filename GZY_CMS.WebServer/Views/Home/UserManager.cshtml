@@ -95,18 +95,18 @@
                 $("#grid-table").jqGrid(
                     {
                         autowidth:true,
-                        url: 'data/JSONData.json',//组件创建完成之后请求数据的url
+                        url: '@Url.Action("UserSelect","Home")',//组件创建完成之后请求数据的url
                         datatype: "json",//请求数据返回的类型。可选json,xml,txt
-                        colNames: ['Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Notes'],//jqGrid的列显示名字
+                        colNames: ['ID', 'Loginname', 'Name', 'Mobile', 'Email', 'Sex', 'ValidYN'],//jqGrid的列显示名字
                         colModel: [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
        
-                            { name: 'id', index: 'id', width: 60, sorttype: "int", editable: true },
-                            { name: 'sdate', index: 'sdate', width: 90, editable: true, sorttype: "date" },
-                            { name: 'name', index: 'name', width: 150, editable: true, editoptions: { size: "20", maxlength: "30" } },
-                            { name: 'stock', index: 'stock', width: 70, editable: true, edittype: "checkbox", editoptions: { value: "Yes:No" } },
-                            { name: 'ship', index: 'ship', width: 90, editable: true, edittype: "select", editoptions: { value: "FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX" } },
-                            { name: 'note', index: 'note', width: 150, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "10" } },
-                            { name: 'sdssate', index: 'sdate', width: 90, editable: true, sorttype: "date" }, 
+                            { name: 'ID', index: 'ID', width: 60, sorttype: "int", editable: true },
+                            { name: 'Loginname', index: 'Loginname', width: 90, editable: true },
+                            { name: 'Name', index: 'Name', width: 150, editable: true, editoptions: { size: "20", maxlength: "30" } },
+                            { name: 'Mobile', index: 'Mobile', width: 70, editable: true, edittype: "checkbox", editoptions: { value: "Yes:No" } },
+                            { name: 'Email', index: 'Email', width: 90, editable: true, edittype: "select", editoptions: { value: "FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX" } },
+                            { name: 'Sex', index: 'Sex', width: 150, sortable: false, editable: true, edittype: "textarea", editoptions: { rows: "2", cols: "10" } },
+                            { name: 'ValidYN', index: 'ValidYN', width: 90, editable: true, sorttype: "date" }, 
                         ],
                         rowNum: 10,//一页显示多少条
                         rowList: [10, 20, 30],//可供用户选择一页显示多少条
