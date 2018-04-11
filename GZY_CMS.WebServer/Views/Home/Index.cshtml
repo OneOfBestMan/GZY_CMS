@@ -336,15 +336,15 @@
 
 <!--布局中间 -->
 <div class="main-container ace-save-state" id="main-container">
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         try { ace.settings.loadState('main-container') } catch (e) { }
-    </script>
+    </script>*@
 
     <!-- #section:basics/sidebar -->
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
-        <script type="text/javascript">
+        @*<script type="text/javascript">
             try { ace.settings.loadState('sidebar') } catch (e) { }
-        </script>
+        </script>*@
         <!--左侧菜单-->
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <!--左侧头部-->
@@ -598,7 +598,38 @@
     </div>
 
     <div class="main-content">
-        <iframe frameborder="0" src="@Url.Action("Contact", "Home")" id="UIframe" width="100%"  onload="iFrameHeight()" ></iframe>
+        <div class="col-sm-12">
+            <iframe frameborder="0" src="@Url.Action("Contact", "Home")" id="UIframe" width="100%" onload="iFrameHeight()"></iframe>
+            @*<div id="tabs">
+            <ul>
+                <li>
+                    <a href="#tabs-1">首页<span class="fa fa-close" style="margin-left:10px;cursor:pointer "></span></a>
+                </li>
+
+                <li>
+                    <a href="#tabs-2">Proin dolor<span class="fa fa-close" style="margin-left:10px;cursor:pointer "></span></a>
+                </li>
+
+                <li>
+                    <a href="#tabs-3">Aenean lacinia</a>
+                </li>
+            </ul>
+
+            <div id="tabs-1">
+
+            </div>
+
+            <div id="tabs-2">
+                <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla..</p>
+            </div>
+
+            <div id="tabs-3">
+                <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Praesent eu risus hendrerit ligula tempus pretium.</p>
+            </div>
+        </div>*@
+
+        </div><!-- ./col -->
+
     </div>
 </div><!-- /.main-container -->
 
@@ -634,7 +665,9 @@
 @section scripts{
     <script>
         $(function () {
-            iFrameHeight();
+            var tabs = $("#tabs").tabs();
+           // iFrameHeight();
+           
             $(".nav li a").each(function () {
                 $(this).click(function () {
                     var urldate = $(this).attr("url");

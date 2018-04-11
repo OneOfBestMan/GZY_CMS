@@ -46,7 +46,7 @@ namespace GZY_CMS.WebServer.Controllers
             return View();
         }
 
-        public AjaxObjectResult<List<SystemModel.GZY_User>> UserSelect(string Loginname, string Name, string ValidYN, int page, int rows)
+        public AjaxObjectResult<dynamic> UserSelect(string Loginname, string Name, string ValidYN, int page, int rows)
         {
             var date = userService.Select(Loginname, Name,ValidYN, page, rows,out int Records);
             int total = Records / rows + (Records % rows > 0 ? 1 : 0);
@@ -55,9 +55,9 @@ namespace GZY_CMS.WebServer.Controllers
                 page = page,
                 total = total,
                 records = Records,
-                list = date
+                rows = date
             };
-            return SuccessData(date);
+            return SuccessData<dynamic>(json);
         }
     }
 }

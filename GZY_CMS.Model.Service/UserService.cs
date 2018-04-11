@@ -35,7 +35,7 @@ namespace GZY_CMS.Service
             }
             var count = usercontext.Count();
             total = count;
-            return usercontext.Skip(index).Take(rows).ToList();
+            return usercontext.Skip(rows * (index - 1)).Take(rows).ToList();
         }
     }
 }

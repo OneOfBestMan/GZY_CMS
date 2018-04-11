@@ -22,7 +22,7 @@
     <![endif]-->
     <link rel="stylesheet" href="~/Ace/assets/css/ace-skins.css" />
     <link rel="stylesheet" href="~/Ace/assets/css/ace-rtl.css" />
-
+    <link rel="stylesheet" href="assets/css/ui.jqgrid.css" />
     <!--[if lte IE 9]>
       <link rel="stylesheet" href="../assets/css/ace-ie.css" />
     <![endif]-->
@@ -94,7 +94,8 @@
     <script src="~/Ace/assets/js/src/ace.searchbox-autocomplete.js"></script>
     <script src="~/js/vue/vue.js"></script>
     <script src="~/js/layer/layer.js"></script>
-    <script>
+    <script src="~/js/Ajaxhook/ajaxhook.js"></script>
+    <script type="text/javascript">
         $(function () {
             $(".JQdatepicker").attr("readonly", "readonly");
             $(".JQdatepicker").datepicker({
@@ -107,29 +108,53 @@
                 }
             });
             var loadinfo
-            $.ajaxSetup({
-                cache: false,
-                //请求失败遇到异常触发
-                error: function (xhr, status, e) {
+
+            hookAjax({
+                onreadystatechange: function (xhr) {
+                    console.log("onreadystatechange called: %O", xhr)
+                },
+                onload: function (xhr) {
                     layer.close(loadinfo); 
-                    if (e == null) {
-                        e = "未知错误"
+                    console.log("onload called")
+                    try {
+                    if (xhr.status != 200) {
+                        if (xhr.status == 500) {
+                            var jsondate = $.parseJSON(xhr.responseText);
+                            layer.alert("发生异常的错误!信息:" + xhr.status + jsondate.message, { icon: 5 });
+                            return true;
+
+                        }
+                        layer.alert("发生异常的错误!状态码:" + xhr.status, { icon: 5 });
+                        return true;
                     }
-                    layer.alert("发生异常的错误!信息:" + e, { icon: 5 });
+                    var jsondate = $.parseJSON(xhr.responseText);
+                    if (jsondate.type == 3) {
+
+                        layer.alert("系统错误!信息:" + jsondate.message, { icon: 5 });
+                        return true;
+                    }
+                        xhr.responseText = JSON.stringify(jsondate.resultdata);
+
+                    } catch (e) {
+                        layer.alert("解析错误!信息:" + e.message, { icon: 5 });
+                        return true;
+                    }
+                    //return true;
                 },
-                //完成请求后触发。即在success或error触发后触发
-                complete: function (xhr, status) {
-                    layer.close(loadinfo); 
-                },
-                //发送请求前触发
-                beforeSend: function (xhr) {
+                open: function (arg) {
                     loadinfo = layer.load('加载中',
                         {
                             icon: 1
                             , shade: [0.5, '#fff']
                         });
+                    console.log("open called: method:%s,url:%s,async:%s", arg[0], arg[1], arg[2])
                 },
+                send: function (arg) {
+                    console.log("send called: %O", arg[0])
+                }
             })
+
+
         })
     </script>
     @RenderSection("Scripts", required: false)

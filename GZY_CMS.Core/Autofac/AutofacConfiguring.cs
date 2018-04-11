@@ -30,13 +30,7 @@ namespace GZY_CMS.Core.Autofac
            
             containerBuilder.RegisterModule(module);
             var manager = new ApplicationPartManager();
-            //builder.RegisterAssemblyTypes(typeof(ValuesController).GetTypeInfo().Assembly)
-            //   .Where(
-            //       t =>
-            //           typeof(Controller).IsAssignableFrom(t) &&
-            //           t.Name.EndsWith("Controller", StringComparison.Ordinal)).PropertiesAutowired();
             var date = AppDomain.CurrentDomain.GetAssemblies();
-            //System.Reflection.Assembly.GetExecutingAssembly();
             foreach (var item in date)
             {
                 manager.ApplicationParts.Add(new AssemblyPart(item));
