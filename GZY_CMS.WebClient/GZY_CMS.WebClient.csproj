@@ -18,4 +18,6 @@
     <ProjectReference Include="..\GZY_CMS.Model.Service\GZY_CMS.Service.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
 </Project>

@@ -17,76 +17,74 @@
         <li class="active">用户信息</li>
     </ul><!-- /.breadcrumb -->
     <!-- #section:basics/content.searchbox -->
-
-
     <!-- /section:basics/content.breadcrumbs -->
     <div class="page-content">
         <div class="row">
             <div class="col-xs-12">
                 <div id="enterprisetools">
                     <div>
-                            <div class="widget-box ui-sortable-handle " >
-                                <div class="widget-header">
-                                    <h5 class="widget-title">查询区</h5>
+                        <div class="widget-box ui-sortable-handle ">
+                            <div class="widget-header">
+                                <h5 class="widget-title">查询区</h5>
 
-                                    <!-- #section:custom/widget-box.toolbar -->
-                                    <div class="widget-toolbar">
+                                <!-- #section:custom/widget-box.toolbar -->
+                                <div class="widget-toolbar">
 
-                                        <a href="#" data-action="collapse">
-                                            <i class="ace-icon fa fa-chevron-up"></i>
-                                        </a>
-                                    </div>
-
-                                    <!-- /section:custom/widget-box.toolbar -->
+                                    <a href="#" data-action="collapse">
+                                        <i class="ace-icon fa fa-chevron-up"></i>
+                                    </a>
                                 </div>
 
-                                <div class="widget-body">
-                                    <div class="widget-main">
-                                        <table style="border-spacing:10px;  border-collapse:separate;" width="100%" >
-                                            <tr>
-                                                <td>账户名：</td>
-                                                <td>
-                                                    <input type="text" class="input-sm" id="txt_slbh" name="txt_slbh" />
-                                                </td>
-                                                <td>用户姓名：</td>
-                                                <td>
-                                                    <input type="text" class="input-sm" id="txt_xfr" name="txt_xfr" />
-                                                </td>
-                                                <td>是否有效：</td>
-                                                <td>
-                                                    <select id="txt_zycd" name="txt_zycd" class="input-sm">
-                                                        <option value="">请选择</option>
-                                                        <option value="Y">有效</option>
-                                                        <option value="N">无效</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
+                                <!-- /section:custom/widget-box.toolbar -->
+                            </div>
 
-                                                <td colspan="8" style="text-align:right">
-                                                    <button class="btn btn-primary btn-xs btn-round">
-                                                        <i class="ace-icon fa fa-search align-top bigger-125"></i>
-                                                        查询
-                                                    </button>
-                                                    <button class="btn btn-success btn-xs btn-round">
-                                                        <i class="ace-icon fa fa-plus-square align-top bigger-125"></i>
-                                                        添加
-                                                    </button>
-                                                    <button class="btn btn-yellow btn-xs btn-round">
-                                                        <i class="ace-icon fa fa-pencil align-top bigger-125"></i>
-                                                        编辑
-                                                    </button>
-                                                    <button class="btn btn-danger btn-xs btn-round">
-                                                        <i class="ace-icon fa fa-trash align-top bigger-125"></i>
-                                                        删除
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <table style="border-spacing:10px;  border-collapse:separate;" width="100%">
+                                        <tr>
+                                            <td>账户名：</td>
+                                            <td>
+                                                <input type="text" class="input-sm" id="txt_slbh" name="txt_slbh" />
+                                            </td>
+                                            <td>用户姓名：</td>
+                                            <td>
+                                                <input type="text" class="input-sm" id="txt_xfr" name="txt_xfr" />
+                                            </td>
+                                            <td>是否有效：</td>
+                                            <td>
+                                                <select id="txt_zycd" name="txt_zycd" class="input-sm">
+                                                    <option value="">请选择</option>
+                                                    <option value="Y">有效</option>
+                                                    <option value="N">无效</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td colspan="8" style="text-align:right">
+                                                <button class="btn btn-primary btn-xs btn-round">
+                                                    <i class="ace-icon fa fa-search align-top bigger-125"></i>
+                                                    查询
+                                                </button>
+                                                <button class="btn btn-success btn-xs btn-round" onclick="showdialog()">
+                                                    <i class="ace-icon fa fa-plus-square align-top bigger-125"></i>
+                                                    添加
+                                                </button>
+                                                <button class="btn btn-yellow btn-xs btn-round">
+                                                    <i class="ace-icon fa fa-pencil align-top bigger-125"></i>
+                                                    编辑
+                                                </button>
+                                                <button class="btn btn-danger btn-xs btn-round">
+                                                    <i class="ace-icon fa fa-trash align-top bigger-125"></i>
+                                                    删除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
-                            <input type="hidden" value="@(ViewBag.guid == "" ? "" : ViewBag.guid)" name="guid">
+                        </div>
+                        <input type="hidden" value="@(ViewBag.guid == "" ? "" : ViewBag.guid)" name="guid">
                     </div>
                     <!-- /section:basics/content.searchbox -->
                 </div>
@@ -95,20 +93,80 @@
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.page-content -->
+</div>
+    <!--Dialog-->
+
+<div id="dialog" class="form-horizontal">
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-6"> 登陆名: </label>
+        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh"  v-model="message" />
+    </div>
+
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-6"> 用户名: </label>
+        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh" />
+    </div>
+
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-6"> 手机号: </label>
+        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh" />
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-6"> Email: </label>
+        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh" />
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-6"> 性别: </label>
+        <select id="txt_zycd" name="txt_zycd" class="input-sm"  v-model="sex">
+            <option value="">请选择</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+      
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-6"> 是否有效: </label>
+        <input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox"  v-model="validYN" >
+        <span class="lbl"></span>
+    </div>
+</div>
     @section scripts{
 
-        <script type="text/javascript">
-            jQuery(function ($) {
-                var grid_selector = "#grid-table";
-                var pager_selector = "#grid-pager";
-                $("#grid-table").jqGrid(
+    <script type="text/javascript">
+
+
+      
+             jQuery(function ($) {
+               loadGrid();
+               
+                 var dialog = new Vue({
+                     el: '#dialog',
+                     data: {
+                         loginname: '',
+                         name: '',
+                         mobile: '',
+                         email: '',
+                         sex: '男',
+                         validYN:true
+                     },
+                     methods: {
+                         reverseMessage: function () {
+                             this.message = this.message.split('').reverse().join('')
+                         }
+                     }
+                 })
+                 LoadDialog();
+            });
+           //初始化Grid
+            function loadGrid(){
+                    $("#grid-table").jqGrid(
                     {
                         autowidth: true,
                         url: '@Url.Action("UserSelect","Home")',//组件创建完成之后请求数据的url
                         datatype: "json",//请求数据返回的类型。可选json,xml,txt
                         colNames: ['id', '登陆名', '用户名', '手机号', 'Email', '性别', '是否有效','查看详情'],//jqGrid的列显示名字
                         colModel: [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-       
+
                             { name: 'id', index: 'id', width: 60, sorttype: "int", hidden:true },
                             { name: 'loginname', index: 'loginname', width: 90 },
                             { name: 'name', index: 'name', width: 150,  },
@@ -140,7 +198,7 @@
                                     return html;
                                 }
                             }
-                            
+
                         ],
                         rowNum: 10,//一页显示多少条
                         rowList: [10, 20, 30],//可供用户选择一页显示多少条
@@ -151,17 +209,28 @@
                         viewrecords: true,
                         caption: "用户列表"//表格的标题名字
                     });
-                $.post('@Url.Action("UserSelect","Home")', "", function (date) {
-                    alert(date)
+            }
 
-                });
+             //初始化Dialog
+        function LoadDialog() {
+            $("#dialog").dialog({
+                title: "编辑",
+                autoOpen: false,
+                height: 350,
+                width: 400,
+                modal: true,
+                autoOpen: false
             });
-
+        }
             //查询数据
             function Selectdate() {
 
 
             }
-        </script>
 
-    }
+        function showdialog() {
+            $("#dialog").dialog("open");
+        }
+    </script>
+
+  }

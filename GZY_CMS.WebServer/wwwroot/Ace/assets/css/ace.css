@@ -2,6 +2,9 @@ html {
   min-height: 100%;
   position: relative;
 }
+button {
+    outline: none;
+}
 body {
   background-color: #E4E6E9;
   min-height: 100%;
@@ -17140,7 +17143,6 @@ img.editable-click:hover {
   background-color: #F1F1F1;
   font-size: 16px;
   color: #669FC7;
-  padding: 0;
 }
 .ui-dialog .ui-dialog-title,
 .ui-jqdialog .ui-dialog-title,

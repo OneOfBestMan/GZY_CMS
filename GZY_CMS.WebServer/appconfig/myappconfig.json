@@ -1,0 +1,7 @@
+﻿{
+  "ConnectionString": {
+    "GZY_CMS": "Server=111.231.81.169;database=GZY_CMS;uid=root;pwd=Gzy*123456;",
+    "GZY_System": "Server=111.231.81.169;database=GZY_System;uid=root;pwd=Gzy*123456;"
+  }
+
+}

@@ -15,9 +15,16 @@ namespace GZY_CMS.WebServer
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
-            Configuration = configuration;
+           // Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+               .SetBasePath(hostingEnvironment.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", optional: true)
+               .AddJsonFile($"appconfig/myappconfig.json", optional: true)
+               .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -27,10 +34,12 @@ namespace GZY_CMS.WebServer
         {
             services.RegisterController();
             services.AddMvc();
+            var cons = Configuration.GetSection("ConnectionString")["GZY_CMS"];
+            var conss = Configuration.GetSection("ConnectionString")["GZY_System"];
             services.AddDbContextPool<GZYCMSContext>(
-                    options => options.UseMySql(@"Server=111.231.81.169;database=GZY_CMS;uid=root;pwd=Gzy*123456;"));
+                    options => options.UseMySql(cons));
             services.AddDbContextPool<SystemContext>(
-                   options => options.UseMySql(@"Server=111.231.81.169;database=GZY_System;uid=root;pwd=Gzy*123456;"));
+                   options => options.UseMySql(conss));
             return services.ReplacementIOC(new AutofacModule());
         }
 

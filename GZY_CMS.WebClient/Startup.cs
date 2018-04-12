@@ -2,21 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using GZY_CMS.Core.Autofac;
 using GZY_CMS.Model;
+using GZY_CMS.SystemModel;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace GZY_CMS.WebClient
+namespace GZY_CMS.WebServer
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
-            Configuration = configuration;
+            // Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+               .SetBasePath(hostingEnvironment.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", optional: true)
+               .AddJsonFile($"appconfig/myappconfig.json", optional: true)
+               .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -26,8 +34,12 @@ namespace GZY_CMS.WebClient
         {
             services.RegisterController();
             services.AddMvc();
+            var cons = Configuration.GetSection("ConnectionString")["GZY_CMS"];
+            var conss = Configuration.GetSection("ConnectionString")["GZY_System"];
             services.AddDbContextPool<GZYCMSContext>(
-                    options => options.UseMySql(@"Server=111.231.81.169;database=GZY_CMS;uid=root;pwd=Gzy*123456;"));
+                    options => options.UseMySql(cons));
+            services.AddDbContextPool<SystemContext>(
+                   options => options.UseMySql(conss));
             return services.ReplacementIOC(new AutofacModule());
         }
 
@@ -41,7 +53,7 @@ namespace GZY_CMS.WebClient
             }
             else
             {
-                app.UseExceptionHandler(" / Home/Error");
+                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();

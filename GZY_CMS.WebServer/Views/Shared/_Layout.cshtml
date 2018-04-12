@@ -22,7 +22,6 @@
     <![endif]-->
     <link rel="stylesheet" href="~/Ace/assets/css/ace-skins.css" />
     <link rel="stylesheet" href="~/Ace/assets/css/ace-rtl.css" />
-    <link rel="stylesheet" href="assets/css/ui.jqgrid.css" />
     <!--[if lte IE 9]>
       <link rel="stylesheet" href="../assets/css/ace-ie.css" />
     <![endif]-->
@@ -151,7 +150,10 @@
                 },
                 send: function (arg) {
                     console.log("send called: %O", arg[0])
-                }
+                },
+                ontimeout:function(xhr){
+                      layer.alert("系统响应超时!", { icon: 5 });
+                 }
             })
 
 
