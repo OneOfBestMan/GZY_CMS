@@ -99,7 +99,7 @@
 <div id="dialog" class="form-horizontal">
     <div class="col-xs-12 form-group">
         <label class="col-xs-6"> 登陆名: </label>
-        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh"  v-model="message" />
+        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh"  v-model="loginname" />
     </div>
 
     <div class="col-xs-12 form-group">
@@ -129,108 +129,118 @@
         <input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox"  v-model="validYN" >
         <span class="lbl"></span>
     </div>
+    <div class="col-xs-12 form-group" style="text-align:center">
+        <button class="btn btn-success btn-sm btn-round" v-on:click="adduser"><i class="ace-icon fa fa-plus" ></i>确定</button>
+        <button class="btn btn-danger btn-sm btn-round" v-on:click="close"><i class="ace-icon fa fa-close" ></i>取消</button>
+    </div>
 </div>
     @section scripts{
 
-    <script type="text/javascript">
+<script type="text/javascript">
+    var dialogVue
+    jQuery(function ($) {
+        loadGrid();
 
-
-      
-             jQuery(function ($) {
-               loadGrid();
-               
-                 var dialog = new Vue({
-                     el: '#dialog',
-                     data: {
-                         loginname: '',
-                         name: '',
-                         mobile: '',
-                         email: '',
-                         sex: '男',
-                         validYN:true
-                     },
-                     methods: {
-                         reverseMessage: function () {
-                             this.message = this.message.split('').reverse().join('')
-                         }
-                     }
-                 })
-                 LoadDialog();
-            });
-           //初始化Grid
-            function loadGrid(){
-                    $("#grid-table").jqGrid(
-                    {
-                        autowidth: true,
-                        url: '@Url.Action("UserSelect","Home")',//组件创建完成之后请求数据的url
-                        datatype: "json",//请求数据返回的类型。可选json,xml,txt
-                        colNames: ['id', '登陆名', '用户名', '手机号', 'Email', '性别', '是否有效','查看详情'],//jqGrid的列显示名字
-                        colModel: [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-
-                            { name: 'id', index: 'id', width: 60, sorttype: "int", hidden:true },
-                            { name: 'loginname', index: 'loginname', width: 90 },
-                            { name: 'name', index: 'name', width: 150,  },
-                            { name: 'mobile', index: 'mobile', width: 70 },
-                            { name: 'email', index: 'email', width: 90},
-                            {
-                                name: 'sex', index: 'sex', width: 150, sortable: false, formatter: function (cellvalue, options, rowObject) {
-                                    var temp = "男"
-                                    if (!cellvalue) {
-
-                                        temp = "女"
-                                    }
-                                    return temp;
-                                }
-                            },
-                            {
-                                name: 'validYN', index: 'validYN', width: 90, formatter: function (cellvalue, options, rowObject) {
-                                    var temp = "有效"
-                                    if (cellvalue=='n') {
-
-                                        temp = "无效"
-                                    }
-                                    return temp;
-                                }
-                            },
-                            {
-                                name: '查看', index: '查看', width: 90, formatter: function (cellvalue, options, rowObject) {
-                                    var html = '<button class="btn btn-success btn-xs btn-round"><i class="ace-icon fa fa-search-plus"></i>查看详情</button>';
-                                    return html;
-                                }
-                            }
-
-                        ],
-                        rowNum: 10,//一页显示多少条
-                        rowList: [10, 20, 30],//可供用户选择一页显示多少条
-                        pager: '#grid-pager',//表格页脚的占位符(一般是div)的id
-                        sortname: 'id',//初始化的时候排序的字段
-                        sortorder: "desc",//排序方式,可选desc,asc
-                        mtype: "post",//向后台请求数据的ajax的类型。可选post,get
-                        viewrecords: true,
-                        caption: "用户列表"//表格的标题名字
-                    });
+        dialogVue = new Vue({
+            el: '#dialog',
+            data: {
+                loginname: '',
+                name: '',
+                mobile: '',
+                email: '',
+                sex: '',
+                validYN: null
+            },
+            methods: {
+                adduser: function () {
+                    alert(this.loginname)
+                   // this.message = this.message.split('').reverse().join('')
+                },
+                close: function () {
+                    $("#dialog").dialog("close");
+                    // this.message = this.message.split('').reverse().join('')
+                }
             }
+        })
+        LoadDialog();
+    });
+           //初始化Grid
+    function loadGrid() {
+        $("#grid-table").jqGrid(
+            {
+                autowidth: true,
+                url: '@Url.Action("UserSelect","Home")',//组件创建完成之后请求数据的url
+                datatype: "json",//请求数据返回的类型。可选json,xml,txt
+                colNames: ['id', '登陆名', '用户名', '手机号', 'Email', '性别', '是否有效', '查看详情'],//jqGrid的列显示名字
+                colModel: [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
+
+                    { name: 'id', index: 'id', width: 60, sorttype: "int", hidden: true },
+                    { name: 'loginname', index: 'loginname', width: 90 },
+                    { name: 'name', index: 'name', width: 150, },
+                    { name: 'mobile', index: 'mobile', width: 70 },
+                    { name: 'email', index: 'email', width: 90 },
+                    {
+                        name: 'sex', index: 'sex', width: 150, sortable: false, formatter: function (cellvalue, options, rowObject) {
+                            var temp = "男"
+                            if (!cellvalue) {
+
+                                temp = "女"
+                            }
+                            return temp;
+                        }
+                    },
+                    {
+                        name: 'validYN', index: 'validYN', width: 90, formatter: function (cellvalue, options, rowObject) {
+                            var temp = "有效"
+                            if (cellvalue == 'n') {
+
+                                temp = "无效"
+                            }
+                            return temp;
+                        }
+                    },
+                    {
+                        name: '查看', index: '查看', width: 90, formatter: function (cellvalue, options, rowObject) {
+                            var html = '<button class="btn btn-success btn-xs btn-round"><i class="ace-icon fa fa-search-plus"></i>查看详情</button>';
+                            return html;
+                        }
+                    }
+
+                ],
+                rowNum: 10,//一页显示多少条
+                rowList: [10, 20, 30],//可供用户选择一页显示多少条
+                pager: '#grid-pager',//表格页脚的占位符(一般是div)的id
+                sortname: 'id',//初始化的时候排序的字段
+                sortorder: "desc",//排序方式,可选desc,asc
+                mtype: "post",//向后台请求数据的ajax的类型。可选post,get
+                viewrecords: true,
+                caption: "用户列表"//表格的标题名字
+            });
+    }
 
              //初始化Dialog
-        function LoadDialog() {
-            $("#dialog").dialog({
-                title: "编辑",
-                autoOpen: false,
-                height: 350,
-                width: 400,
-                modal: true,
-                autoOpen: false
-            });
-        }
-            //查询数据
-            function Selectdate() {
-
-
+    function LoadDialog() {
+        $("#dialog").dialog({
+            title: "编辑",
+            autoOpen: false,
+            height: 400,
+            width: 400,
+            modal: true,
+            autoOpen: false,
+            close: function () {
+              
             }
+        });
+    }
+            //查询数据
+    function Selectdate() {
 
-        function showdialog() {
-            $("#dialog").dialog("open");
-        }
-    </script>
+
+    }
+
+    function showdialog() {
+        $("#dialog").dialog("open");
+    }
+</script>
 
   }
