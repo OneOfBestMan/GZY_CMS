@@ -8,6 +8,7 @@ using GZY_CMS.WebServer.Models;
 using GZY_CMS.IService;
 using GZY_CMS.Core.Base;
 using GZY_CMS.Utility.AjaxResult;
+using GZY_CMS.SystemModel;
 
 namespace GZY_CMS.WebServer.Controllers
 {
@@ -44,6 +45,21 @@ namespace GZY_CMS.WebServer.Controllers
         {
            // Json()
             return View();
+        }
+
+
+        public AjaxResult AddUser(GZY_User user)
+        {
+            var date = userService.Add(user);
+            if (date)
+            {
+                return Success("添加成功!");
+            }
+            else
+            {
+                return Errors("添加失败!");
+            }
+          
         }
 
         public AjaxObjectResult<dynamic> UserSelect(string Loginname, string Name, string ValidYN, int page, int rows)

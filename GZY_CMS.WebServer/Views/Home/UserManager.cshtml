@@ -98,40 +98,65 @@
 
 <div id="dialog" class="form-horizontal">
     <div class="col-xs-12 form-group">
-        <label class="col-xs-6"> 登陆名: </label>
-        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh"  v-model="loginname" />
+        <label class="col-xs-4 control-label"> 登陆名: </label>
+        <div class="col-xs-8">
+            <input type="text" v-model="Loginname" datatype="*" errormsg="请选择企业类型！" nullmsg="请选择企业类型！" />
+        </div>
     </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-4 control-label"> 用户名: </label>
+        <div class="col-xs-8">
+            <input type="text" v-model="Name" datatype="*" errormsg="请选择企业类型！" nullmsg="请选择企业类型！" />
+        </div>
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-4 control-label"> 手机号: </label>
+        <div class="col-xs-8">
+            <input type="text" v-model="Mobile" datatype="*" errormsg="请选择企业类型！" nullmsg="请选择企业类型！" />
+        </div>
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-4 control-label"> Email: </label>
+        <div class="col-xs-8">
+            <input type="text" v-model="Email" datatype="*" errormsg="请选择企业类型！" nullmsg="请选择企业类型！" />
+        </div>
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-4 control-label"> 性别: </label>
+        <div class="col-xs-8">
+            <span class="block input-icon input-icon-right">
+                <select class="col-xs-12" v-model="Sex">
+                    <option value="">请选择</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </span>
+        </div>
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-4 control-label"> 是否有效: </label>
+        <div class="col-xs-8">
+                <input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" v-model="ValidYN">
+                <span class="lbl"></span>
+        </div>
+    </div>
+    @*<div class="col-xs-12 form-group">
+            <label class="col-xs-6"> 性别: </label>
+            <select id="txt_zycd" name="txt_zycd" class="input-sm" v-model="Sex">
+                <option value="">请选择</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
 
-    <div class="col-xs-12 form-group">
-        <label class="col-xs-6"> 用户名: </label>
-        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh" />
-    </div>
-
-    <div class="col-xs-12 form-group">
-        <label class="col-xs-6"> 手机号: </label>
-        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh" />
-    </div>
-    <div class="col-xs-12 form-group">
-        <label class="col-xs-6"> Email: </label>
-        <input type="text" class="col-xs-6" id="txt_slbh" name="txt_slbh" />
-    </div>
-    <div class="col-xs-12 form-group">
-        <label class="col-xs-6"> 性别: </label>
-        <select id="txt_zycd" name="txt_zycd" class="input-sm"  v-model="sex">
-            <option value="">请选择</option>
-            <option value="男">男</option>
-            <option value="女">女</option>
-        </select>
-      
-    </div>
-    <div class="col-xs-12 form-group">
-        <label class="col-xs-6"> 是否有效: </label>
-        <input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox"  v-model="validYN" >
-        <span class="lbl"></span>
-    </div>
+        </div>
+        <div class="col-xs-12 form-group">
+            <label class="col-xs-6"> 是否有效: </label>
+            <input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" v-model="ValidYN">
+            <span class="lbl"></span>
+        </div>*@
     <div class="col-xs-12 form-group" style="text-align:center">
-        <button class="btn btn-success btn-sm btn-round" v-on:click="adduser"><i class="ace-icon fa fa-plus" ></i>确定</button>
-        <button class="btn btn-danger btn-sm btn-round" v-on:click="close"><i class="ace-icon fa fa-close" ></i>取消</button>
+        <button class="btn btn-success btn-sm btn-round" v-on:click="adduser"><i class="ace-icon fa fa-plus"></i>确定</button>
+        <button class="btn btn-danger btn-sm btn-round" v-on:click="close"><i class="ace-icon fa fa-close"></i>取消</button>
     </div>
 </div>
     @section scripts{
@@ -139,22 +164,42 @@
 <script type="text/javascript">
     var dialogVue
     jQuery(function ($) {
+      
         loadGrid();
+        LoadVue();
+        LoadDialog();
+        $("#dialog").Validform({
+            tiptype: 3,
+        });
+    });
 
-        dialogVue = new Vue({
+    //双向绑定数据
+    function LoadVue() {
+         dialogVue = new Vue({
             el: '#dialog',
             data: {
-                loginname: '',
-                name: '',
-                mobile: '',
-                email: '',
-                sex: '',
-                validYN: null
+                Loginname: '',
+                Name: '',
+                Mobile: '',
+                Email: '',
+                Sex: '',
+                ValidYN: false
             },
             methods: {
                 adduser: function () {
-                    alert(this.loginname)
-                   // this.message = this.message.split('').reverse().join('')
+                    var demo = $("#dialog").Validform();
+                    var ok = demo.check();
+                    if (!ok) {
+                        alert("asdad");
+                        return;
+                    }
+                    var userd = this._data;
+                    $.post("@Url.Action("AddUser", "Home")", { user: userd }, function (data) { 
+                        if (data == 0) {
+                            $("#grid-table").trigger("reloadGrid");
+                            $("#dialog").dialog("close");
+                        }
+                    })
                 },
                 close: function () {
                     $("#dialog").dialog("close");
@@ -162,8 +207,7 @@
                 }
             }
         })
-        LoadDialog();
-    });
+    }
            //初始化Grid
     function loadGrid() {
         $("#grid-table").jqGrid(

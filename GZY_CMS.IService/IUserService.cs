@@ -8,7 +8,7 @@ namespace GZY_CMS.IService
 {
     public interface IUserService : IDependency
     {
-        int Add();
+        bool Add(GZY_User model);
 
         List<GZY_User> Select(string Loginname,string Name, string ValidYN,int index, int rows, out int total);
     }

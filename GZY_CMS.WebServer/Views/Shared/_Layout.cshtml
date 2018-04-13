@@ -22,12 +22,14 @@
     <![endif]-->
     <link rel="stylesheet" href="~/Ace/assets/css/ace-skins.css" />
     <link rel="stylesheet" href="~/Ace/assets/css/ace-rtl.css" />
+    <link href="~/css/validformstyle.css" rel="stylesheet" />
     <!--[if lte IE 9]>
       <link rel="stylesheet" href="../assets/css/ace-ie.css" />
     <![endif]-->
     <!-- inline styles related to this page -->
     <!-- ace settings handler -->
     <script src="~/Ace/assets/js/ace-extra.js"></script>
+
 
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
     <!--[if lte IE 8]>
@@ -94,6 +96,7 @@
     <script src="~/js/vue/vue.js"></script>
     <script src="~/js/layer/layer.js"></script>
     <script src="~/js/Ajaxhook/ajaxhook.js"></script>
+    <script src="~/js/Validform/Validform_v5.3.2.js"></script>
     <script type="text/javascript">
         $(function () {
             $(".JQdatepicker").attr("readonly", "readonly");
@@ -113,7 +116,7 @@
                     console.log("onreadystatechange called: %O", xhr)
                 },
                 onload: function (xhr) {
-                    layer.close(loadinfo); 
+                    layer.close(loadinfo);
                     console.log("onload called")
                     try {
                     if (xhr.status != 200) {
@@ -131,6 +134,16 @@
 
                         layer.alert("系统错误!信息:" + jsondate.message, { icon: 5 });
                         return true;
+                    }
+                    if(jsondate.code==0){
+                         layer.alert("系统消息!信息:" + jsondate.message, { icon: 6 });
+                         xhr.responseText = JSON.stringify(jsondate.code);
+                        return false;
+                    }
+                    if(jsondate.code==-1){
+                         layer.alert("系统消息!信息:" + jsondate.message, { icon: 5 });
+                         xhr.responseText = JSON.stringify(jsondate.code);
+                        return false;
                     }
                         xhr.responseText = JSON.stringify(jsondate.resultdata);
 

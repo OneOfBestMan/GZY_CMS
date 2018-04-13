@@ -13,9 +13,9 @@ namespace GZY_CMS.Service
 
 
         public IRepository<GZY_User, SystemContext> SysContext { get; set; }
-        public int Add()
+        public bool Add(GZY_User model)
         {
-            throw new NotImplementedException();
+            return SysContext.Add(model);
         }
 
         public List<GZY_User> Select(string Loginname, string Name, string ValidYN, int index, int rows, out int total)
