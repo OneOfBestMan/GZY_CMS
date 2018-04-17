@@ -1280,7 +1280,16 @@
 			});
 			
 			return this;
-		}
+        },
+
+        resetval: function () {
+            var obj = this;
+            var vailmodel = $(obj.forms);
+            vailmodel.find(".Validform_checktip").removeClass("Validform_right");
+            vailmodel.find(".Validform_checktip").removeClass("Validform_wrong");
+            vailmodel.find(".Validform_checktip").removeClass("Validform_loading");
+            vailmodel.find(".Validform_checktip").html("");
+        }
 	}
 
 	$.fn.Validform=function(settings){

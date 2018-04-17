@@ -100,35 +100,62 @@
     <div class="col-xs-12 form-group">
         <label class="col-xs-4 control-label"> 登陆名: </label>
         <div class="col-xs-8">
-            <input type="text" v-model="Loginname" datatype="*" errormsg="请选择企业类型！" nullmsg="请选择企业类型！" />
+            <input type="text"
+                   v-model="Loginname"
+                   datatype="*"
+                   errormsg="请输入登录名!"
+                   nullmsg="请输入登录名!" />
         </div>
     </div>
     <div class="col-xs-12 form-group">
         <label class="col-xs-4 control-label"> 用户名: </label>
         <div class="col-xs-8">
-            <input type="text" v-model="Name" datatype="*" errormsg="请选择企业类型！" nullmsg="请选择企业类型！" />
+            <input type="text"
+                   v-model="Name"
+                   datatype="*"
+                   errormsg="请输入登录名！"
+                   nullmsg="请输入登录名！" />
+        </div>
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-4 control-label"> 密码: </label>
+        <div class="col-xs-8">
+            <input type="text"
+                   v-model="Pwd"
+                   datatype="*"
+                   errormsg="请输入密码!"
+                   nullmsg="请输入密码!" />
         </div>
     </div>
     <div class="col-xs-12 form-group">
         <label class="col-xs-4 control-label"> 手机号: </label>
         <div class="col-xs-8">
-            <input type="text" v-model="Mobile" datatype="*" errormsg="请选择企业类型！" nullmsg="请选择企业类型！" />
+            <input type="text"
+                   v-model="Mobile"
+                   datatype="*"
+                   errormsg="请输入手机号!"
+                   nullmsg="请输入手机号!" />
         </div>
     </div>
     <div class="col-xs-12 form-group">
         <label class="col-xs-4 control-label"> Email: </label>
         <div class="col-xs-8">
-            <input type="text" v-model="Email" datatype="*" errormsg="请选择企业类型！" nullmsg="请选择企业类型！" />
+            <input type="text"
+                   v-model="Email" />
         </div>
     </div>
     <div class="col-xs-12 form-group">
         <label class="col-xs-4 control-label"> 性别: </label>
         <div class="col-xs-8">
             <span class="block input-icon input-icon-right">
-                <select class="col-xs-12" v-model="Sex">
+                <select class="input-sm"
+                        v-model="Sex" 
+                        errormsg="请选择性别!"
+                        nullmsg="请选择性别!"
+                        datatype="*">
                     <option value="">请选择</option>
-                    <option value="男">男</option>
-                    <option value="女">女</option>
+                    <option value="true">男</option>
+                    <option value="false">女</option>
                 </select>
             </span>
         </div>
@@ -136,8 +163,11 @@
     <div class="col-xs-12 form-group">
         <label class="col-xs-4 control-label"> 是否有效: </label>
         <div class="col-xs-8">
-                <input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" v-model="ValidYN">
-                <span class="lbl"></span>
+            <input name="switch-field-1"
+                   class="ace ace-switch ace-switch-6"
+                   type="checkbox"
+                   v-model="ValidYN">
+            <span class="lbl"></span>
         </div>
     </div>
     @*<div class="col-xs-12 form-group">
@@ -162,13 +192,14 @@
     @section scripts{
 
 <script type="text/javascript">
-    var dialogVue
+    var dialogVue;
+    var dialogValidform;
     jQuery(function ($) {
       
         loadGrid();
         LoadVue();
         LoadDialog();
-        $("#dialog").Validform({
+        dialogValidform = $("#dialog").Validform({
             tiptype: 3,
         });
     });
@@ -177,25 +208,30 @@
     function LoadVue() {
          dialogVue = new Vue({
             el: '#dialog',
-            data: {
-                Loginname: '',
-                Name: '',
-                Mobile: '',
-                Email: '',
-                Sex: '',
-                ValidYN: false
-            },
+             data: function () {
+                 return {
+                     Loginname: '',
+                     Name: '',
+                     Mobile: '',
+                     Email: '',
+                     Sex: '',
+                     Pwd:'',
+                     ValidYN: true
+                 }
+             },
             methods: {
                 adduser: function () {
-                    var demo = $("#dialog").Validform();
-                    var ok = demo.check();
+                    //var demo = $("#dialog").Validform();
+                    var ok = dialogValidform.check();
                     if (!ok) {
-                        alert("asdad");
                         return;
                     }
-                    var userd = this._data;
-                    $.post("@Url.Action("AddUser", "Home")", { user: userd }, function (data) { 
+                    var userd = this;
+                    $.post("@Url.Action("AddUser", "Home")", { user: userd._data }, function (data) { 
                         if (data == 0) {
+
+                            Object.assign(userd.$data, userd.$options.data());
+                            dialogValidform.resetval()
                             $("#grid-table").trigger("reloadGrid");
                             $("#dialog").dialog("close");
                         }
@@ -236,7 +272,7 @@
                     {
                         name: 'validYN', index: 'validYN', width: 90, formatter: function (cellvalue, options, rowObject) {
                             var temp = "有效"
-                            if (cellvalue == 'n') {
+                            if (cellvalue == 'false') {
 
                                 temp = "无效"
                             }
