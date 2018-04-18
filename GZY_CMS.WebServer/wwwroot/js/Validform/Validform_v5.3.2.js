@@ -668,7 +668,7 @@
 			return arr;
 		},
 
-		showmsg:function(msg,type,o,triggered){
+        showmsg: function (msg, type, o, triggered) {
 			/*
 				msg:提示文字;
 				type:提示信息显示方式;
@@ -680,10 +680,11 @@
 				tiptype:2\3时在ajax时弹框
 				tipSweep为true时在triggered bycheck时不触发showmsg，但ajax出错的情况下要提示
 			*/
-			
-			//如果msg为undefined，那么就没必要执行后面的操作，ignore有可能会出现这情况;
-			if(msg==undef){return;}
-			
+
+            //如果msg为undefined，那么就没必要执行后面的操作，ignore有可能会出现这情况;
+            if (msg == undef) { return; }
+            //如果控件是禁用状态,直接不显示.
+            if (o.obj[0].disabled == true || o.obj[0].readOnly == true) { return; }
 			//tipSweep为true，且当前不是处于错误状态时，blur事件不触发信息显示;
 			if(triggered=="bycheck" && o.sweep && (o.obj && !o.obj.is(".Validform_error") || typeof type == "function")){return;}
 
@@ -1289,6 +1290,9 @@
             vailmodel.find(".Validform_checktip").removeClass("Validform_wrong");
             vailmodel.find(".Validform_checktip").removeClass("Validform_loading");
             vailmodel.find(".Validform_checktip").html("");
+            vailmodel.find("[datatype]").removeData("cked").removeData("dataIgnore").each(function () {
+                this.validform_lastval = null;
+            });
         }
 	}
 

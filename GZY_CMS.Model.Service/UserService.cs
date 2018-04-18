@@ -37,5 +37,32 @@ namespace GZY_CMS.Service
             total = count;
             return usercontext.Skip(rows * (index - 1)).Take(rows).ToList();
         }
+
+
+        public int DeleteUser(int[] ids)
+        {
+            List<GZY_User> list = new List<GZY_User>();
+            foreach (var item in ids)
+            {
+                var date = SysContext.Get(a => a.ID == item);
+                if (date != null)
+                {
+                    list.Add(date);
+                }
+
+            }
+          return  SysContext.RemoveRange(list);
+        }
+
+        public GZY_User SelectUserModel(int id)
+        {
+            return SysContext.Get(a => a.ID == id);
+        }
+
+
+        public bool UpdataUserModel(GZY_User model)
+        {
+            return SysContext.Update(model);
+        }
     }
 }

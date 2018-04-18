@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 
 namespace GZY_CMS.WebServer
 {
@@ -33,7 +34,11 @@ namespace GZY_CMS.WebServer
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.RegisterController();
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(option => {
+                option.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //设置时间格式
+                option.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+            });
             var cons = Configuration.GetSection("ConnectionString")["GZY_CMS"];
             var conss = Configuration.GetSection("ConnectionString")["GZY_System"];
             services.AddDbContextPool<GZYCMSContext>(

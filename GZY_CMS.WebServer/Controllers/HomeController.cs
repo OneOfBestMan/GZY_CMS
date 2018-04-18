@@ -62,6 +62,16 @@ namespace GZY_CMS.WebServer.Controllers
           
         }
 
+        public AjaxResult RomeUsers(int[] ids)
+        {
+            var date = userService.DeleteUser(ids);
+            if (date > 0)
+            {
+                return Success("删除成功!");
+            }
+            return Errors("删除失败!");
+        }
+
         public AjaxObjectResult<dynamic> UserSelect(string Loginname, string Name, string ValidYN, int page, int rows)
         {
             var date = userService.Select(Loginname, Name,ValidYN, page, rows,out int Records);
@@ -74,6 +84,21 @@ namespace GZY_CMS.WebServer.Controllers
                 rows = date
             };
             return SuccessData<dynamic>(json);
+        }
+
+        public AjaxObjectResult<GZY_User> SelectUserModel(int id)
+        {
+            var model = userService.SelectUserModel(id);
+            return SuccessData<GZY_User>(model);
+        }
+
+        public AjaxResult UpdateUser(GZY_User user)
+        {
+            if (userService.UpdataUserModel(user))
+            {
+                return Success("修改成功!");
+            }
+            return Errors("修改失败!");
         }
     }
 }
