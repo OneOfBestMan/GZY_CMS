@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "UserManager";
+    ViewData["Title"] = "WorkIndex";
 }
 
 <!-- #section:basics/content.breadcrumbs -->
@@ -12,9 +12,9 @@
         </li>
 
         <li>
-            <a href="#">用户管理</a>
+            <a href="#">系统管理</a>
         </li>
-        <li class="active">用户信息</li>
+        <li class="active">资源管理</li>
     </ul><!-- /.breadcrumb -->
     <!-- #section:basics/content.searchbox -->
     <!-- /section:basics/content.breadcrumbs -->
@@ -42,24 +42,36 @@
                                 <div class="widget-main">
                                     <table style="border-spacing:10px;  border-collapse:separate;" width="100%">
                                         <tr>
-                                            <td>账户名：</td>
+                                            <td>资源名：</td>
                                             <td>
-                                                <input type="text" 
-                                                       class="input-sm"  
-                                                       name="txt_slbh" 
+                                                <input type="text"
+                                                       class="input-sm"
+                                                       name="txt_slbh"
                                                        v-model="Loginname" />
                                             </td>
-                                            <td>用户姓名：</td>
+                                            <td>资源内容：</td>
                                             <td>
-                                                <input type="text" 
-                                                       class="input-sm"  
+                                                <input type="text"
+                                                       class="input-sm"
                                                        name="txt_xfr"
-                                                       v-model="Name"/>
+                                                       v-model="Name" />
+                                            </td>
+                                            <td>资源类型：</td>
+                                            <td>
+                                                <select id="txt_zycd"
+                                                        name="txt_zycd"
+                                                        class="input-sm"
+                                                        v-model="ValidYN">
+                                                    <option value="">请选择</option>
+                                                    <option value="true">节点</option>
+                                                    <option value="false">入口资源</option>
+                                                    <option value="false">页面资源</option>
+                                                </select>
                                             </td>
                                             <td>是否有效：</td>
                                             <td>
-                                                <select id="txt_zycd" 
-                                                        name="txt_zycd" 
+                                                <select id="txt_zycd"
+                                                        name="txt_zycd"
                                                         class="input-sm"
                                                         v-model="ValidYN">
                                                     <option value="">请选择</option>
@@ -70,7 +82,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="8" style="text-align:right">
-                                                <button class="btn btn-primary btn-xs btn-round"  v-on:click="selectuser">
+                                                <button class="btn btn-primary btn-xs btn-round" v-on:click="selectuser">
                                                     <i class="ace-icon fa fa-search align-top bigger-125"></i>
                                                     查询
                                                 </button>
@@ -78,8 +90,8 @@
                                                     <i class="ace-icon fa fa-plus-square align-top bigger-125"></i>
                                                     添加
                                                 </button>
-                                                <button class="btn btn-yellow btn-xs btn-round" onclick="showUpdatadialog()" >
-                                                    <i class="ace-icon fa fa-pencil align-top bigger-125" ></i>
+                                                <button class="btn btn-yellow btn-xs btn-round" onclick="showUpdatadialog()">
+                                                    <i class="ace-icon fa fa-pencil align-top bigger-125"></i>
                                                     编辑
                                                 </button>
                                                 <button class="btn btn-danger btn-xs btn-round" onclick="deleteUser()">
@@ -102,11 +114,11 @@
         </div><!-- /.row -->
     </div><!-- /.page-content -->
 </div>
-    <!--Dialog-->
+<!--Dialog-->
 
 <div id="dialog" class="form-horizontal">
     <div class="col-xs-12 form-group">
-        <label class="col-xs-4 control-label"> 登陆名: </label>
+        <label class="col-xs-4 control-label"> 资源名: </label>
         <div class="col-xs-8">
             <input type="text"
                    v-model="Model.Loginname"
@@ -117,7 +129,7 @@
         </div>
     </div>
     <div class="col-xs-12 form-group">
-        <label class="col-xs-4 control-label"> 用户名: </label>
+        <label class="col-xs-4 control-label"> 资源内容: </label>
         <div class="col-xs-8">
             <input type="text"
                    v-model="Model.Name"
@@ -128,50 +140,36 @@
         </div>
     </div>
     <div class="col-xs-12 form-group">
-        <label class="col-xs-4 control-label"> 密码: </label>
-        <div class="col-xs-8">
-            <input type="text"
-                   v-model="Model.Pwd"
-                   :disabled="isDisabled"
-                   datatype="*"
-                   errormsg="请输入密码!"
-                   nullmsg="请输入密码!" />
-        </div>
-    </div>
-    <div class="col-xs-12 form-group">
-        <label class="col-xs-4 control-label"> 手机号: </label>
-        <div class="col-xs-8">
-            <input type="text"
-                   v-model="Model.Mobile"
-                   :disabled="isDisabled"
-                   datatype="*"
-                   errormsg="请输入手机号!"
-                   nullmsg="请输入手机号!" />
-        </div>
-    </div>
-    <div class="col-xs-12 form-group">
-        <label class="col-xs-4 control-label"> Email: </label>
-        <div class="col-xs-8">
-            <input type="text"
-                   v-model="Model.Email"
-                   :disabled="isDisabled" />
-        </div>
-    </div>
-    <div class="col-xs-12 form-group">
-        <label class="col-xs-4 control-label"> 性别: </label>
+        <label class="col-xs-4 control-label"> 资源类型: </label>
         <div class="col-xs-8">
             <span class="block input-icon input-icon-right">
                 <select class="input-sm"
-                        v-model="Model.Sex" 
+                        v-model="Model.Sex"
                         :disabled="isDisabled"
                         errormsg="请选择性别!"
                         nullmsg="请选择性别!"
                         datatype="*">
                     <option value="">请选择</option>
-                    <option value="true">男</option>
-                    <option value="false">女</option>
+                    <option value="true">入口资源</option>
+                    <option value="false">页面资源</option>
                 </select>
             </span>
+        </div>
+    </div>
+    <div class="col-xs-12 form-group">
+        <label class="col-xs-4 control-label"> 上级资源: </label>
+        <div class="col-xs-8">
+            <select class="input-sm"
+                    id="UpSelect"
+                    v-model="Model.Sex"
+                    :disabled="isDisabled"
+                    errormsg="请选择性别!"
+                    nullmsg="请选择性别!"
+                    datatype="*">
+                <option value="">请选择</option>
+                <option value="true">入口资源</option>
+                <option value="false">页面资源</option>
+            </select>
         </div>
     </div>
     <div class="col-xs-12 form-group">
@@ -186,7 +184,7 @@
         </div>
     </div>
     <div class="col-xs-12 form-group" style="text-align:center">
-        <button class="btn btn-yellow btn-sm btn-round" v-on:click="updateusr" v-if="isupdate"  v-show="!isDisabled">
+        <button class="btn btn-yellow btn-sm btn-round" v-on:click="updateusr" v-if="isupdate" v-show="!isDisabled">
             <i class="ace-icon fa fa-pencil align-top bigger-125"></i>
             编辑
         </button>
@@ -203,14 +201,40 @@
 </div>
 @section scripts{
 
-<script type="text/javascript">
+    <script type="text/javascript">
     var dialogVue;
     var dialogValidform;
     var selectVue;
+
     jQuery(function ($) {
         loadGrid();
         LoadVue();
         LoadDialog();
+        $('#UpSelect').select2({
+            ajax: {
+                url: 'https://api.github.com/orgs/select2/repos',
+                data: function (params) {
+                    return {
+                        name: params.term
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    /*var itemList = [];//当数据对象不是{id:0,text:'ANTS'}这种形式的时候，可以使用类似此方法创建新的数组对象
+                    var arr = data.result.list
+                    for(item in arr){
+                        itemList.push({id: item, text: arr[item]})
+                    }*/
+                    return {
+                        results: data.items//itemList
+                    };
+                },
+                cache: true,
+                placeholder: '请选择',//默认文字提示
+                language: "zh-CN",
+                minimumInputLength: 1//最少输入多少个字符后开始查询
+            }
+        });
         dialogValidform = $("#dialog").Validform({
             tiptype: 3,
         });
@@ -224,13 +248,11 @@
                 return {
                     Model: {
                         ID:'',
-                        Loginname: '',
-                        Name: '',
-                        Mobile: '',
-                        Email: '',
-                        Sex: '',
-                        Pwd: '',
-                        ValidYN: true
+                        Upperid: '',
+                        Node_abbre: '',
+                        Node_href: '',
+                        Node_type: '',
+                        NodeValid: true
                     },
                     isDisabled: false,
                     isupdate: false
@@ -261,7 +283,7 @@
                     var userd = this;
                     $.post("@Url.Action("UpdateUser", "Home")", { user: userd._data.Model }, function (data) {
                         if (data == 0) {
-                           
+
                             $("#grid-table").trigger("reloadGrid");
                             $("#dialog").dialog("close");
                         }
@@ -277,8 +299,9 @@
             el: '#selectbox',
              data: function () {
                  return {
-                     Loginname: '',
-                     Name: '',
+                     Node_abbre: '',
+                     Node_href: '',
+                     Node_type: '',
                      ValidYN: ''
                  }
              },
@@ -288,10 +311,10 @@
                     $("#grid-table").jqGrid('setGridParam', {
                         datatype: 'json',
                         mytype: "post",
-                        postData: { Loginname: userd.Loginname, Name: userd.Name, ValidYN: userd.ValidYN }, //发送数据  
+                        postData: { Loginname: userd.Loginname, Name: userd.Name, ValidYN: userd.ValidYN }, //发送数据
                         page: 1
-                    }).trigger("reloadGrid"); //重新载入  
-                } 
+                    }).trigger("reloadGrid"); //重新载入
+                }
             }
         })
 
@@ -310,14 +333,14 @@
         layer.confirm('删除后不可修复,确定要删除数据?', {
             btn: ['删除', '取消'] //按钮
         }, function () {
-            $.post('@Url.Action("RomeUsers", "Home")', { ids: rows }, function () { 
+            $.post('@Url.Action("RomeUsers", "Home")', { ids: rows }, function () {
                 $("#grid-table").trigger("reloadGrid");
             });
         });
 
     }
 
-    
+
            //初始化Grid
     function loadGrid() {
         $("#grid-table").jqGrid(
@@ -373,7 +396,7 @@
                 caption: "用户列表"//表格的标题名字
             });
     }
-   
+
     //初始化Dialog
     function LoadDialog() {
         $("#dialog").dialog({
@@ -414,8 +437,8 @@
             dialogVue.isDisabled = true;
         })
         $("#dialog").dialog("open");
-        
-    }
-</script>
 
-  }
+    }
+    </script>
+
+}

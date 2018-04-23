@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/Ace/components/font-awesome/css/font-awesome.css" />
 
     <!-- page specific plugin styles -->
+    <link href="~/Ace/components/select2/dist/css/select2.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Ace/components/_mod/jquery-ui/jquery-ui.css" />
     <link rel="stylesheet" href="~/Ace/components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
     <link rel="stylesheet" href="~/Ace/components/_mod/jqgrid/ui.jqgrid.css" />
@@ -68,7 +69,8 @@
     <script src="~/Ace/components/jqGrid/js/jquery.jqGrid.js"></script>
     <script src="~/Ace/components/jquery-ui/ui/i18n/datepicker-zh-CN.js"></script>
     <script src="~/Ace/components/jqGrid/js/i18n/grid.locale-cn.js"></script>
-
+    <script src="~/Ace/components/select2/dist/js/select2.js"></script>
+    <script src="~/Ace/components/select2/dist/js/i18n/zh-CN.js"></script>
     <!-- ace scripts -->
     <script src="~/Ace/assets/js/src/elements.scroller.js"></script>
     <script src="~/Ace/assets/js/src/elements.colorpicker.js"></script>
@@ -119,32 +121,32 @@
                     layer.close(loadinfo);
                     console.log("onload called")
                     try {
-                    if (xhr.status != 200) {
-                        if (xhr.status == 500) {
-                            var jsondate = $.parseJSON(xhr.responseText);
-                            layer.alert("发生异常的错误!信息:" + xhr.status + jsondate.message, { icon: 5 });
+                        if (xhr.status != 200) {
+                            if (xhr.status == 500) {
+                                var jsondate = $.parseJSON(xhr.responseText);
+                                layer.alert("发生异常的错误!信息:" + xhr.status + jsondate.message, { icon: 5 });
+                                return true;
+
+                            }
+                            layer.alert("发生异常的错误!状态码:" + xhr.status, { icon: 5 });
                             return true;
-
                         }
-                        layer.alert("发生异常的错误!状态码:" + xhr.status, { icon: 5 });
-                        return true;
-                    }
-                    var jsondate = $.parseJSON(xhr.responseText);
-                    if (jsondate.type == 3) {
+                        var jsondate = $.parseJSON(xhr.responseText);
+                        if (jsondate.type == 3) {
 
-                        layer.alert("系统错误!信息:" + jsondate.message, { icon: 5 });
-                        return true;
-                    }
-                    if(jsondate.code==0){
-                         layer.alert("系统消息!信息:" + jsondate.message, { icon: 6 });
-                         xhr.responseText = JSON.stringify(jsondate.code);
-                        return false;
-                    }
-                    if(jsondate.code==-1){
-                         layer.alert("系统消息!信息:" + jsondate.message, { icon: 5 });
-                         xhr.responseText = JSON.stringify(jsondate.code);
-                        return false;
-                    }
+                            layer.alert("系统错误!信息:" + jsondate.message, { icon: 5 });
+                            return true;
+                        }
+                        if (jsondate.code == 0) {
+                            layer.alert("系统消息!信息:" + jsondate.message, { icon: 6 });
+                            xhr.responseText = JSON.stringify(jsondate.code);
+                            return false;
+                        }
+                        if (jsondate.code == -1) {
+                            layer.alert("系统消息!信息:" + jsondate.message, { icon: 5 });
+                            xhr.responseText = JSON.stringify(jsondate.code);
+                            return false;
+                        }
                         xhr.responseText = JSON.stringify(jsondate.resultdata);
 
                     } catch (e) {
@@ -164,9 +166,9 @@
                 send: function (arg) {
                     console.log("send called: %O", arg[0])
                 },
-                ontimeout:function(xhr){
-                      layer.alert("系统响应超时!", { icon: 5 });
-                 }
+                ontimeout: function (xhr) {
+                    layer.alert("系统响应超时!", { icon: 5 });
+                }
             })
 
 
