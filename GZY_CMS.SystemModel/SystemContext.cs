@@ -22,11 +22,6 @@ namespace GZY_CMS.SystemModel
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //  Mlogger.AddProvider(new MyFilteredLoggerProvider());
-            //var loggerFactory =
-            //     optionsBuilder
-            //    //  .UseLoggerFactory(Mlogger)
-            //    .UseMySql(@"Server=101.37.25.170;database=coretest1;uid=sheca@2017;pwd=YM2U8MM9;");
 
         }
 
